@@ -4,7 +4,7 @@ yum install git -y
 mkdir -p /home/vagrant/epam_devops/
 git config --global user.name "simonovmaks"
 git config --global user.email "simonov.max.al@gmail.com"
-sudo git clone --progress --branch Task1 https://github.com/simonovmaks/epam_devops.git /home/vagrant/epam_devops/
+git clone --progress --branch Task1 https://github.com/simonovmaks/epam_devops.git /home/vagrant/epam_devops/
 cat epam_devops/task1.txt
 echo "192.168.10.20 server2" | sudo tee -a /etc/hosts
 SCRIPT
