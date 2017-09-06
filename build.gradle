@@ -13,13 +13,15 @@ String gradlePropertiesFile = "gradle.properties"
 task updateFile {
     doLast {
         def fileNameOutput2 = new File(file)
-// вывод в файл  greeting.txt текущей версии билда
         fileNameOutput2.write version
         def changedGradleFile = new File(gradlePropertiesFile)
         def (mjVersion, mnVersion, devVersion) = version.tokenize('.')
-        devVersion++
-        //version.replaceFirst(/\W/,'') (version=)(\d+[.]){2}\d{4} // доделать регулярку
+        int number = Integer.parseInt(devVersion)
+        number++
+        devVersion = Integer.toString(number)
+        version = ''
         changedGradleFile.write('version=' + mjVersion + '.')
+        //changedGradleFile.append(mjVersion + '.')
         changedGradleFile.append(mnVersion + '.')
         changedGradleFile.append(devVersion)
     }}
@@ -27,3 +29,4 @@ task updateFile {
         archiveName "task3.war"
     }
 war.dependsOn updateFile
+
