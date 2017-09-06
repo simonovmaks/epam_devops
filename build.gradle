@@ -1,12 +1,31 @@
-task build_war {
 apply plugin: 'war'
 
-war {archiveName'task3.war'}
 repositories {
-  mavenCentral()
-  }
+    mavenCentral()
 }
 dependencies {
-  compile 'log4j:log4j:1.2.17'
-  compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    compile 'log4j:log4j:1.2.17'
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+}
+//String fileProp = "greeting.txt"
+String file = "./build/resources/main/greeting.txt"
+String gradlePropertiesFile = "gradle.properties"
+
+def fileNameOutput2 = new File(file)
+    if(!fileNameOutput2.exists()) {
+        fileNameOutput2.write("$version")
+    }
+// вывод в файл  greeting.txt текущей версии билда
+fileNameOutput2.write("$version")
+
+def changedGradleFile = new File(gradlePropertiesFile)
+
+    def (mjVersion, mnVersion,devVersion) = version.tokenize('.')
+    devVersion ++
+    //version.replaceFirst(/\W/,'') (version=)(\d+[.]){2}\d{4}
+    changedGradleFile.write('version='+mjVersion+'.')//ща регулярку нужно подшаманить
+    changedGradleFile.append(mnVersion+'.')
+    changedGradleFile.append(devVersion)
+war {
+    archiveName "task3.war"
 }
