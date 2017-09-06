@@ -13,7 +13,7 @@ String gradlePropertiesFile = "gradle.properties"
 
 def fileNameOutput2 = new File(file)
     if(!fileNameOutput2.exists()) {
-        fileNameOutput2.write("$version")
+        fileNameOutput2.createNewFile()
     }
 // вывод в файл  greeting.txt текущей версии билда
 fileNameOutput2.write("$version")
