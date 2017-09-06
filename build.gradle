@@ -20,11 +20,7 @@ task updateFile {
         number++
         devVersion = Integer.toString(number)
 
-        def textGradleProperties = changedGradleFile.getText()
-        textGradleProperties=textGradleProperties.replaceAll('(\\d+[.]){2}\\d+','')
-
-        changedGradleFile.write(textGradleProperties)
-        changedGradleFile.append(mjVersion + '.')
+        changedGradleFile.write('version=' + mjVersion + '.')
         changedGradleFile.append(mnVersion + '.')
         changedGradleFile.append(devVersion)
     }
