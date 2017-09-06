@@ -13,20 +13,24 @@ String gradlePropertiesFile = "gradle.properties"
 task updateFile {
     doLast {
         def fileNameOutput2 = new File(file)
-        fileNameOutput2.write version
+        fileNameOutput2.write(version)
         def changedGradleFile = new File(gradlePropertiesFile)
         def (mjVersion, mnVersion, devVersion) = version.tokenize('.')
         int number = Integer.parseInt(devVersion)
         number++
         devVersion = Integer.toString(number)
-        version = ''
-        changedGradleFile.write('version=' + mjVersion + '.')
-        //changedGradleFile.append(mjVersion + '.')
+
+        def textGradleProperties = changedGradleFile.getText()
+        textGradleProperties=textGradleProperties.replaceAll('(\\d+[.]){2}\\d+','')
+
+        changedGradleFile.write(textGradleProperties)
+        changedGradleFile.append(mjVersion + '.')
         changedGradleFile.append(mnVersion + '.')
         changedGradleFile.append(devVersion)
-    }}
-    war {
-        archiveName "task3.war"
     }
+}
+war {
+    archiveName "task3.war"
+}
 war.dependsOn updateFile
 
