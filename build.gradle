@@ -13,7 +13,6 @@ String gradlePropertiesFile = "gradle.properties"
 task updateFile {
     doLast {
         def fileNameOutput2 = new File(file)
-        fileNameOutput2.write()
         fileNameOutput2.write('()'+ version)    
         def changedGradleFile = new File(gradlePropertiesFile)
         def (mjVersion, mnVersion, devVersion) = version.tokenize('.')
