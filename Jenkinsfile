@@ -50,7 +50,7 @@ def version = propFile.substring(8)
             sh("git push --tags https://${git_login}:${git_pass}@github.com/${gitUrl} ${tree}")
             sh("git checkout master")
             sh("git merge Task3")
-            sh("git tag ${version}")
+            sh("git tag ${version}_master")
             sh("git push --tags https://${git_login}:${git_pass}@github.com/${gitUrl} master")
         }
     }
