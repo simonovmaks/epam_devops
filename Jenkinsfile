@@ -14,7 +14,7 @@ node () {
         git branch: tree, url: repositoryUrl
     }
     stage ('build'){
-        sh('chmod +x ./gradlew && ./gradlew clean build')
+        sh('chmod +x ./gradlew task increment && ./gradlew clean build')
     }
     def propFile = readFile gradleProp
     def version = propFile.substring(8)
