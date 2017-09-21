@@ -13,14 +13,17 @@ String gradlePropertiesFile = "gradle.properties"
 task updateFile {
     doLast {
         def fileNameOutput2 = new File(file)
-        fileNameOutput2.append(' version ' + version)    
+        fileNameOutput2.append(' version ' + version)
+    }
+}
+task increment {
+    doLast {
         def changedGradleFile = new File(gradlePropertiesFile)
         def (mjVersion, mnVersion, devVersion) = version.tokenize('.')
         int number = Integer.parseInt(devVersion)
         number++
         devVersion = Integer.toString(number)
-
-        changedGradleFile.write('version=' + mjVersion + '.')
+		changedGradleFile.write('version=' + mjVersion + '.')
         changedGradleFile.append(mnVersion + '.')
         changedGradleFile.append(devVersion)
     }
