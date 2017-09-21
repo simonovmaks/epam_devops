@@ -44,8 +44,14 @@ def version = propFile.substring(8)
             sh("git config --global user.name \"${GitUser}\"")
             sh("git config --global user.email \"${GitUserEmail}\"")
             sh("git add ${gradleProp}")
-            sh("git commit -am \"Jenkins commit. Build - ${version}.${BUILD_NUMBER}\"")            
-            sh("git push https://${git_login}:${git_pass}@github.com/${gitUrl} ${tree}")
+            sh("git status")
+            sh("git tag ${version}")
+            sh("git commit -am \"Jenkins commit. Build - ${version}.${BUILD_NUMBER}\"")
+            sh("git push --tags https://${git_login}:${git_pass}@github.com/${gitUrl} ${tree}")
+            sh("git checkout master")
+            sh("git merge Task3")
+            sh("git tag ${version}")
+            sh("git push --tags https://${git_login}:${git_pass}@github.com/${gitUrl} master")
         }
     }
 }
