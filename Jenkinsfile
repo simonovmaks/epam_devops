@@ -22,7 +22,7 @@ node () {
     stage('nexus') {
         withCredentials([usernamePassword(credentialsId: '0b647aba-efe2-40fe-85d6-3fc0b310d1c9', passwordVariable: 'NEXUS_PASS', usernameVariable: 'NEXUS_U')]) {
             sh "curl -Lv -u ${NEXUS_U}:${NEXUS_PASS} -T ${WAR} \"http://127.0.0.1:8081/nexus/content/repositories/snapshots/${tree}/${version}/\""
-} 
+    } 
     }
     if(tomcats.size()>0){
         int i = 0
@@ -35,8 +35,8 @@ node () {
                 }
                 sh "sleep 20" 
   
-                    temp = "http://127.0.0.1:80/jkmanager/?cmd=update&from=list&w=balance&sw=${tomcatNode[i]}&vwa=0"
-                    httpRequest httpMode: 'POST', url: temp
+                temp = "http://127.0.0.1:80/jkmanager/?cmd=update&from=list&w=balance&sw=${tomcatNode[i]}&vwa=0"
+                httpRequest httpMode: 'POST', url: temp
                 i++
             }
         }
